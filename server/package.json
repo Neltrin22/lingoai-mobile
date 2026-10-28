@@ -1,0 +1,22 @@
+{
+  "name": "lingoai-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend proxy de LingoAI: guarda la API key y expone /chat, /transcribe y /pronounce.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "openai": "^7.45.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
