@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+﻿import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -10,7 +10,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useInsets } from "../hooks/useInsets";
 import { LevelPicker } from "../components/LevelBadge";
 import { Txt } from "../components/Txt";
 import { Card, PrimaryButton, SecondaryButton } from "../components/ui";
@@ -21,7 +21,7 @@ import { useApp } from "../state/store";
 import { colors, fonts, radius } from "../theme";
 
 export function ProfileScreen() {
-  const insets = useSafeAreaInsets();
+  const insets = useInsets();
   const { state, actions } = useApp();
   const level = state.level ?? "beginner";
   const [apiDraft, setApiDraft] = useState(state.apiUrl);

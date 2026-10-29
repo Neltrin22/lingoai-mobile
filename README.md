@@ -189,11 +189,17 @@ $env:EXPO_PUBLIC_API_URL = "http://192.168.0.10:3001"   # opcional
 npx expo prebuild --platform android --clean
 cd android
 .\gradlew.bat assembleRelease
+# Más rápido (solo ARM, cubre ~99% de celulares):
+# .\gradlew.bat assembleRelease -PreactNativeArchitectures=arm64-v8a,armeabi-v7a
 ```
 
 El APK queda en `android/app/build/outputs/apk/release/app-release.apk`. La firma usa el
 keystore de debug (suficiente para instalar y probar; para publicar hay que crear uno
 propio).
+
+> En este equipo ya se generó `LingoAI-1.0.0-arm64.apk` (26.8 MB, arm64-v8a). Si tu celular
+> es muy antiguo (32 bits), recompila sin `-PreactNativeArchitectures` para incluir
+> `armeabi-v7a`.
 
 También puedes instalar directo en un dispositivo conectado por USB:
 
@@ -317,11 +323,16 @@ La alineación del puntaje de pronunciación usa subsecuencia común más larga 
 ## 10. Verificación realizada
 
 - `npx tsc --noEmit` → sin errores.
-- `npx expo export --platform android` → bundle generado (2.3 MB).
+- `npx expo-doctor` → 20/20 checks.
+- `npx expo export --platform android` → bundle generado.
 - Flujo completo probado en build web: onboarding (5/5 → avanzado), chat con corrección
   real desde el backend, widgets de vocabulario/quiz/pronunciación, dashboard, progreso y
   perfil.
 - Backend probado en modo demo y con contrato JSON validado.
+- **APK release compilado localmente** (`LingoAI-1.0.0-arm64.apk`, 26.8 MB):
+  `com.udea.lingoai`, versionName 1.0.0, minSdk 24, targetSdk 36, ABI arm64-v8a, firmado
+  con el keystore de debug (instalable). No había un dispositivo conectado por USB en el
+  equipo, así que la instalación final se hace manualmente en el celular.
 
 ---
 
@@ -334,6 +345,8 @@ La alineación del puntaje de pronunciación usa subsecuencia común más larga 
 | La app no conecta tras reiniciar el PC | Cambió la IP LAN: actualízala en Perfil o en `.env` y reinicia Metro con `--clear`. |
 | El micrófono no graba | Permiso denegado: Ajustes de Android → Apps → LingoAI → Permisos → Micrófono. |
 | El APK no conecta al backend | Falta `EXPO_PUBLIC_API_URL` en la build y/o `usesCleartextTraffic` (ya está configurado en `app.json`). |
+| Gradle intenta descargar el NDK 27.1 y falla | Instálalo desde Android Studio → SDK Manager, o compila con un NDK ya instalado añadiendo `rootProject.ext.ndkVersion = "<versión>"` en `android/build.gradle`. |
+| `ninja: Filename longer than 260 characters` | Windows limita la ruta. Compila desde una ruta corta (`cmd /c mklink /J C:\lg "<ruta del proyecto>"` y trabaja en `C:\lg`) o habilita las rutas largas de Windows. |
 | Error 429 | Cuota de OpenAI agotada. |
 
 ---

@@ -10,7 +10,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, BackHandler, StyleSheet, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { BottomNav } from "./src/components/BottomNav";
 import { Txt } from "./src/components/Txt";
 import { ChatScreen } from "./src/screens/ChatScreen";
@@ -105,11 +104,9 @@ export default function App() {
   });
 
   return (
-    <SafeAreaProvider>
-      <AppProvider>
-        <Root fontsReady={fontsLoaded || !!fontError} />
-      </AppProvider>
-    </SafeAreaProvider>
+    <AppProvider>
+      <Root fontsReady={fontsLoaded || !!fontError} />
+    </AppProvider>
   );
 }
 

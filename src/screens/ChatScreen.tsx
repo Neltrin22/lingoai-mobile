@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+﻿import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Alert,
@@ -10,7 +10,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useInsets } from "../hooks/useInsets";
 import { LevelBadge } from "../components/LevelBadge";
 import { Txt } from "../components/Txt";
 import { TypingDots } from "../components/TypingDots";
@@ -51,7 +51,7 @@ const GRAMMAR_PROMPTS: Record<string, string> = {
 const BUBBLE_MAX = "78%";
 
 export function ChatScreen({ onOpenProgress }: { onOpenProgress: () => void }) {
-  const insets = useSafeAreaInsets();
+  const insets = useInsets();
   const { state, actions } = useApp();
   const level = state.level ?? "beginner";
   const config = LEVELS[level];

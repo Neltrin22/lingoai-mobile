@@ -38,6 +38,8 @@ yarn-error.*
 dist-web/
 dist-check/
 server/node_modules/
+*.apk
+*.aab
 
 # typescript
 *.tsbuildinfo

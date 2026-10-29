@@ -1,8 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useEffect, useRef } from "react";
-import { Animated, Pressable, StyleSheet, View } from "react-native";
+import React from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 import type { Tab } from "../types";
 import { colors, radius } from "../theme";
+import { useInsets } from "../hooks/useInsets";
 import { Txt } from "./Txt";
 
 const TABS: {
@@ -18,8 +19,9 @@ const TABS: {
 ];
 
 export function BottomNav({ active, onChange }: { active: Tab; onChange: (tab: Tab) => void }) {
+  const insets = useInsets();
   return (
-    <View style={styles.bar}>
+    <View style={[styles.bar, { paddingBottom: 6 + Math.min(insets.bottom, 16) }]}>
       {TABS.map((tab) => {
         const isActive = active === tab.id;
         return (

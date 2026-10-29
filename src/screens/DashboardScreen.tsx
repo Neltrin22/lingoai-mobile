@@ -1,8 +1,8 @@
-import { Ionicons } from "@expo/vector-icons";
+﻿import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useMemo } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useInsets } from "../hooks/useInsets";
 import { LevelBadge } from "../components/LevelBadge";
 import { CircularProgress } from "../components/Progress";
 import { Txt } from "../components/Txt";
@@ -29,7 +29,7 @@ export function DashboardScreen({
   onOpenChat: () => void;
   onOpenProgress: () => void;
 }) {
-  const insets = useSafeAreaInsets();
+  const insets = useInsets();
   const { state } = useApp();
   const level = state.level ?? "beginner";
   const config = LEVELS[level];

@@ -1,7 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
+﻿import { Ionicons } from "@expo/vector-icons";
 import React, { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useInsets } from "../hooks/useInsets";
 import { FlipCard } from "../components/FlipCard";
 import { LevelBadge } from "../components/LevelBadge";
 import { CircularProgress, ProgressBar } from "../components/Progress";
@@ -22,7 +22,7 @@ const SKILL_META: Record<SkillKey, { label: string; color: string }> = {
 };
 
 export function ProgressScreen() {
-  const insets = useSafeAreaInsets();
+  const insets = useInsets();
   const { state } = useApp();
   const [showAll, setShowAll] = useState(false);
   const level = state.level ?? "beginner";
