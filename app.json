@@ -7,11 +7,6 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "lingoai",
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#5B21FA"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.udea.lingoai",
@@ -31,7 +26,6 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -51,6 +45,16 @@
           "android": {
             "usesCleartextTraffic": true
           }
+        }
+      ],
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 180,
+          "resizeMode": "contain",
+          "backgroundColor": "#5B21FA"
         }
       ]
     ]

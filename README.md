@@ -176,6 +176,34 @@ el dispositivo). El backend debe seguir accesible desde la red del celular.
 > Nota: el backend escucha en `0.0.0.0`. Si el celular no conecta, revisa el Firewall de
 > Windows (permitir Node en redes privadas) y que ambos equipos estén en la misma red.
 
+### 6.1 Alternativa: compilar el APK localmente (sin cuenta Expo)
+
+Requiere Android SDK + JDK 17+ y `ANDROID_HOME` configurado. En este equipo el SDK está en
+`%LOCALAPPDATA%\Android\Sdk`.
+
+```powershell
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME
+$env:EXPO_PUBLIC_API_URL = "http://192.168.0.10:3001"   # opcional
+
+npx expo prebuild --platform android --clean
+cd android
+.\gradlew.bat assembleRelease
+```
+
+El APK queda en `android/app/build/outputs/apk/release/app-release.apk`. La firma usa el
+keystore de debug (suficiente para instalar y probar; para publicar hay que crear uno
+propio).
+
+También puedes instalar directo en un dispositivo conectado por USB:
+
+```powershell
+npx expo run:android --variant release
+```
+
+La carpeta `android/` es generada y está ignorada por git; se recrea en cualquier momento
+con `expo prebuild`.
+
 ---
 
 ## 7. Contrato de la API
